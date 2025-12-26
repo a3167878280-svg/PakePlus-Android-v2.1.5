@@ -173,9 +173,111 @@ function triggerFireworks() {
 
 // 倒计时逻辑，假设倒计时结束后触发烟花
 const countdownElement = document.getElementById('countdown');
-// 目标时间（测试用）：本地时区的 2025-12-26 11:30:00
-const targetDate = new Date(2025, 11, 26, 11, 30, 0, 0).getTime();
+const greetingsElement = document.getElementById('greetings');
+// 目标时间：本地时区的 2026-01-01 00:00:00
+const targetDate = new Date(2026, 0, 1, 0, 0, 0, 0).getTime();
 let countdownIntervalId = null;
+
+// 祝福语滚动播放：每次出现一个四字成语，最多保留4个，最上面依次消失
+const BLESSINGS = [
+    '祝您在2026年：',
+    '万事如意',
+    '心想事成',
+    '阖家幸福',
+    '岁岁平安',
+    '福星高照',
+    '鸿运当头',
+    '财源广进',
+    '大吉大利',
+    '身体健康',
+    '前程似锦',
+    '学业有成',
+    '事业腾达',
+    '喜气盈门',
+    '鹏程万里',
+    '龙马精神',
+    '年年有余',
+    '最后祝您新年快乐！',
+];
+
+let blessingsIntervalId = null;
+let hasStartedBlessings = false;
+
+function startBlessingsRoll() {
+    if (hasStartedBlessings) return;
+    hasStartedBlessings = true;
+
+    greetingsElement.innerHTML = '';
+
+    const fontSizePx = parseFloat(getComputedStyle(greetingsElement).fontSize) || 36;
+    const lineHeightPx = fontSizePx * 1.6;
+    const transitionMs = 450;
+    const tickMs = 1000;
+
+    /** @type {{ el: HTMLDivElement, pos: number, removing: boolean }[]} */
+    let activeItems = [];
+    let blessingIndex = 0;
+    let flushSteps = 0;
+
+    const removeItem = (item) => {
+        if (item.removing) return;
+        item.removing = true;
+        item.el.style.opacity = '0';
+        setTimeout(() => {
+            item.el.remove();
+            activeItems = activeItems.filter((x) => x !== item);
+        }, transitionMs);
+    };
+
+    const setTransformForPos = (item) => {
+        item.el.style.transform = `translateY(${-item.pos * lineHeightPx}px)`;
+    };
+
+    const tick = () => {
+        // 先把现有条目整体上移一行
+        activeItems.forEach((item) => {
+            item.pos += 1;
+            setTransformForPos(item);
+        });
+
+        // 添加新祝福，或者在末尾做“清场滚动”
+        if (blessingIndex < BLESSINGS.length) {
+            const el = document.createElement('div');
+            el.className = 'blessing-item';
+            el.textContent = BLESSINGS[blessingIndex];
+            greetingsElement.appendChild(el);
+
+            const item = { el, pos: 0, removing: false };
+            // 从下方出现
+            el.style.transform = `translateY(${lineHeightPx}px)`;
+            activeItems.push(item);
+            requestAnimationFrame(() => {
+                setTransformForPos(item);
+            });
+
+            blessingIndex += 1;
+        } else {
+            flushSteps += 1;
+        }
+
+        // 超过4条的最上方淡出移除
+        activeItems.forEach((item) => {
+            if (item.pos >= 4) {
+                removeItem(item);
+            }
+        });
+
+        // 全部播完后，再滚动4步把剩余条目顶出去
+        const shouldStop = blessingIndex >= BLESSINGS.length && flushSteps >= 4 && activeItems.length === 0;
+        if (shouldStop && blessingsIntervalId !== null) {
+            clearInterval(blessingsIntervalId);
+            blessingsIntervalId = null;
+        }
+    };
+
+    tick();
+    blessingsIntervalId = setInterval(tick, tickMs);
+}
 
 // 倒计时更新函数，用于显示距离目标日期的时间并在到达时触发烟花
 function updateCountdown() {
@@ -199,7 +301,8 @@ function updateCountdown() {
             countdownIntervalId = null;
         }
         countdownElement.style.display = 'none';
-        document.getElementById('greetings').style.display = 'block';
+        greetingsElement.style.display = 'block';
+        startBlessingsRoll();
         launchFireworks();
     }
 }
