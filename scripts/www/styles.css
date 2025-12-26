@@ -35,6 +35,26 @@ body {
     margin: 0; /* 移除默认的边距 */
 }
 
+/* 祝福语滚动容器：最多显示4条，从下往上滚动 */
+#greetings {
+    width: min(90vw, 520px);
+    line-height: 1.6em;
+    height: calc(1.6em * 4);
+    overflow: hidden;
+}
+
+#greetings .blessing-item {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    opacity: 1;
+    transform: translateY(0);
+    transition: transform 450ms linear, opacity 450ms linear;
+    will-change: transform, opacity;
+}
+
 #fireworksCanvas {
     background: transparent;
     position: absolute;
