@@ -3,15 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title>新年倒计时</title>
+    <title>农历新年倒计时</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="header">
+    <div class="app" id="app">
+        <div class="hero" role="main" aria-label="农历新年倒计时">
+            <div class="hero-top">
+                <div class="title" id="countdownTitle">距离除夕还有</div>
+                <div class="countdown" aria-live="polite">
+                    <span class="seg"><span class="num" id="cdDays">00</span><span class="unit">天</span></span>
+                    <span class="seg"><span class="num" id="cdHours">00</span><span class="unit">时</span></span>
+                    <span class="seg"><span class="num" id="cdMinutes">00</span><span class="unit">分</span></span>
+                    <span class="seg"><span class="num" id="cdSeconds">00</span><span class="unit">秒</span></span>
+                </div>
+            </div>
+
+            <div class="illustration-frame" aria-label="天气插画">
+                <div class="flip-card" id="flipCard">
+                    <div class="flip-face flip-front" aria-hidden="true">
+                        <div class="illustration-image" aria-hidden="true"></div>
+                    </div>
+                    <div class="flip-face flip-back" aria-label="七天天气预报">
+                        <div class="forecast">
+                            <div class="forecast-title">未来7天天气预报</div>
+                            <div class="forecast-sub" id="forecastSub">（点击插画可翻回）</div>
+                            <div class="forecast-list" id="forecastList"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-bottom">
+                <div class="line" id="eventDateLine"></div>
+                <div class="line" id="todayLine"></div>
+                <div class="line" id="weatherLine"></div>
+
+                <div class="countdown-controls" aria-label="倒数日管理">
+                    <button class="btn" id="manageButton" type="button">倒数日管理</button>
+                    <select class="select" id="eventSelect" aria-label="选择倒数日"></select>
+                </div>
+                <div class="event-panel" id="eventPanel" hidden>
+                    <div class="event-create">
+                        <input class="input" id="newEventName" type="text" placeholder="新倒数日名称" />
+                        <input class="input" id="newEventTime" type="datetime-local" />
+                        <button class="btn" id="addEventButton" type="button">新建</button>
+                    </div>
+                    <div class="event-toolbar" aria-label="批量操作">
+                        <label class="event-check" for="selectAllEvents">
+                            <input id="selectAllEvents" type="checkbox" />
+                            <span>全选</span>
+                        </label>
+                        <button class="btn" id="deleteSelectedButton" type="button" disabled>删除所选</button>
+                    </div>
+                    <div class="event-list" id="eventList" aria-label="所有倒数日"></div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div id="countdown">距离新年还有：00:00:00</div>
+
+    <div id="globalSparkles" aria-hidden="true"></div>
+
     <canvas id="fireworksCanvas"></canvas>
     <div id="greetings" style="display: none;"></div>
+    <button class="btn back-btn" id="backButton" type="button" style="display: none;">返回倒计时</button>
     <script src="script.js"></script>
 </body>
 </html>
