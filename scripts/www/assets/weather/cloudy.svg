@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" width="800" height="420">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9fb2c8"/>
+      <stop offset="1" stop-color="#e7eef7"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="420" fill="url(#sky)"/>
+  <g opacity="0.98">
+    <path d="M190 260c0-52 42-94 94-94 40 0 75 25 88 60 8-2 16-3 25-3 46 0 84 38 84 84 0 47-38 85-84 85H250c-33 0-60-27-60-60 0-6 1-12 2-17-1 0-1 0-2-1z" fill="#ffffff"/>
+    <path d="M420 290c0-42 34-76 76-76 33 0 61 21 72 50 6-2 13-3 20-3 37 0 67 30 67 67 0 37-30 67-67 67H468c-27 0-48-21-48-48 0-3 0-6 1-9-1 0-1 0-1-1z" fill="#f5f8ff"/>
+  </g>
+</svg>
