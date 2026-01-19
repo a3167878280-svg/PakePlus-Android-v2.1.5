@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" width="1200" height="700">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cfd2d0"/>
+      <stop offset="0.62" stop-color="#dedfdd"/>
+      <stop offset="1" stop-color="#cfd5d2"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b5c9c7" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#9fb4b1" stop-opacity="0.95"/>
+    </linearGradient>
+    <filter id="soft" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="2"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="700" fill="url(#sky)"/>
+  <rect width="1200" height="700" fill="#0a0a0a" opacity="0.08"/>
+
+  <!-- storm clouds -->
+  <g filter="url(#soft)" opacity="0.95" fill="#ffffff">
+    <path d="M90 160c0-40 33-73 73-73 31 0 58 20 69 49 6-2 13-3 20-3 36 0 66 30 66 66 0 36-30 66-66 66H130c-23 0-40-17-40-40 0-4 1-8 2-12-1 0-1 0-2-1z"/>
+    <path d="M420 150c0-52 42-94 94-94 40 0 75 25 88 60 8-2 16-3 25-3 46 0 84 38 84 84 0 47-38 85-84 85H480c-33 0-60-27-60-60 0-6 1-12 2-17-1 0-1 0-2-1z"/>
+    <path d="M860 160c0-44 36-80 80-80 34 0 63 22 75 52 7-2 14-3 22-3 39 0 71 32 71 71 0 40-32 72-71 72H905c-25 0-45-20-45-45 0-3 0-6 1-9-1 0-1-1-1-1z"/>
+  </g>
+
+  <!-- distant hills -->
+  <path d="M0 285 C160 235 260 275 390 255 C520 230 610 215 720 255 C860 310 980 230 1200 275 L1200 350 L0 350 Z" fill="#d4c7b2" opacity="0.5"/>
+
+  <rect x="0" y="470" width="1200" height="230" fill="url(#water)"/>
+
+  <!-- houses -->
+  <g filter="url(#soft)" opacity="0.92">
+    <path d="M650 410 L650 315 L740 315 L740 410 Z" fill="#f7f5ef"/>
+    <path d="M640 322 L695 285 L750 322" fill="none" stroke="#2a2a2a" stroke-width="10" stroke-linejoin="round"/>
+    <path d="M785 420 L785 330 L900 330 L900 420 Z" fill="#f7f5ef"/>
+    <path d="M775 338 L840 295 L910 338" fill="none" stroke="#2a2a2a" stroke-width="10" stroke-linejoin="round"/>
+  </g>
+
+  <!-- lightning -->
+  <path d="M620 230 L560 340 H610 L555 470 L690 300 H640 Z" fill="#ffd45a" opacity="0.9" stroke="#e09b00" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M690 240 L650 310 H680 L640 400" fill="none" stroke="#ffd45a" stroke-width="10" stroke-linecap="round" opacity="0.55"/>
+
+  <!-- rain hint -->
+  <g opacity="0.22" stroke="#2f6f86" stroke-width="3" stroke-linecap="round">
+    <path d="M220 270 l-20 40"/>
+    <path d="M320 285 l-20 40"/>
+    <path d="M420 270 l-20 40"/>
+    <path d="M520 285 l-20 40"/>
+    <path d="M720 270 l-20 40"/>
+    <path d="M820 285 l-20 40"/>
+    <path d="M920 270 l-20 40"/>
+    <path d="M260 310 l-20 40"/>
+    <path d="M660 310 l-20 40"/>
+    <path d="M980 310 l-20 40"/>
+  </g>
+
+  <!-- lightning reflection on water -->
+  <g opacity="0.16" fill="none" stroke="#ffd45a" stroke-width="10" stroke-linecap="round">
+    <path d="M585 560 c35 18 70 18 105 0"/>
+    <path d="M560 590 c55 22 110 22 165 0"/>
+  </g>
+</svg>
